@@ -9,7 +9,7 @@ dishRoute.use(bodyParser.json())
 dishRoute.route('/')
 .all((req , res ,next)=>{
     res.statusCode =200
-    res.setHeader('Content-Type','text/plain')
+    res.setHeader('Content-Type','text/html')
     // when we modify the req/res here and call next() 
     //the modified obj are carried on to next calls
     next()
@@ -18,8 +18,7 @@ dishRoute.route('/')
     res.end('The dishes are being made will send you soon!')
 } )
 .post((req , res ,next)=>{
-    res.end('Will add the dish ' +req.body.name +' with deatials ' +req.body.description)
-
+    res.end(`<html><body>will add the ${req.body.name} dish </body></html>`)
 } )
 .put((req , res ,next)=>{
     res.statusCode =403
@@ -35,7 +34,7 @@ dishRoute.route('/')
 dishRoute.route('/:dishId')
 .all((req , res ,next)=>{
     res.statusCode =200
-    res.setHeader('Content-Type','text/plain')
+    res.setHeader('Content-Type','text/html')
     // when we modify the req/res here and call next() 
     //the modified obj are carried on to next calls
     next()
