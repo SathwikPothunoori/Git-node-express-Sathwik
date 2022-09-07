@@ -1,12 +1,13 @@
-// express router comes together with express so don't need to install again
 const express = require('express')
 
 const bodyParser = require('body-parser')
 
-const dishRoute =express.Router()
+const promRouter = express.Router()
 
-dishRoute.use(bodyParser.json())
-dishRoute.route('/')
+promRouter.use(bodyParser.json())
+
+
+promRouter.route('/')
 .all((req , res ,next)=>{
     res.statusCode =200
     res.setHeader('Content-Type','text/plain')
@@ -15,24 +16,23 @@ dishRoute.route('/')
     next()
 })
 .get((req , res ,next)=>{
-    res.end('The dishes are being made will send you soon!')
+    res.end('The promotions are being made will send you soon!')
 } )
 .post((req , res ,next)=>{
-    res.end('Will add the dish ' +req.body.name +' with deatials ' +req.body.description)
+    res.end('Will add the promotion ' +req.body.name +' with deatials ' +req.body.description)
 
 } )
 .put((req , res ,next)=>{
     res.statusCode =403
-    res.end('PUT operatoin not supported on /dishes')
+    res.end('PUT operatoin not supported on /promotions')
 
 } )
 
 .delete((req , res ,next)=>{
-    res.end('Deleting all the dishes!')
+    res.end('Deleting all the promotions!')
 } )
 
-
-dishRoute.route('/:dishId')
+promRouter.route('/:promId')
 .all((req , res ,next)=>{
     res.statusCode =200
     res.setHeader('Content-Type','text/plain')
@@ -41,21 +41,19 @@ dishRoute.route('/:dishId')
     next()
 })
 .get((req , res ,next)=>{
-    res.end('The dishes are being made will send you soon!')
+    res.end('The promotions are being made will send '+req.params.promId+' you soon!')
 } )
 .post((req , res ,next)=>{
     res.statusCode =403
-    res.end('POST operatoin not supported on /dishes/:'+req.params.dishId)
+    res.end('POST operatoin not supported on /promotions/:'+req.body.name)
 
 } )
 .put((req , res ,next)=>{
-
-    res.end('Will update the dish '+req.params.dishId+' as ' +req.body.name +' with deatials ' +req.body.description)
-
+    res.end('Will update the promotion ' +req.body.name +' with deatials ' +req.body.description)
 } )
 
 .delete((req , res ,next)=>{
-    res.end('Deleting all the dishes!')
+    res.end('Deleting all the promotions!')
 } )
 
-module.exports =dishRoute
+module.exports =promRouter
